@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="new.css" />
+  </head>
+  <body>
+    <div>
+      <p>
+        <button class="speak-this" data-lang="ja">お知らせがあります</button>
+      </p>
+      <hr />
+      <p>
+        <button class="speak-this" data-lang="ja">新しい通知があります</button>
+      </p>
+      <hr />
+      <p>
+        <button class="speak-this" data-lang="ja">新着通知があります</button>
+      </p>
+      <hr />
+      <p>
+        <button class="speak-this" data-lang="en">New notification</button>
+      </p>
+      <hr />
+      <p>
+        <textarea name="v0">こんにちは世界</textarea>
+        <br />
+        <select name="voices">
+          <option value="ja">ja</option>
+          <option value="en">en</option>
+        </select>
+        <br />
+        <button class="speak">Speak</button>
+      </p>
+    </div>
+  </body>
+  <script>
+    const speak = (text, lang) => {
+      const uttr = new SpeechSynthesisUtterance(text)
+      uttr.lang = lang
+      speechSynthesis.speak(uttr)
+    }
+    document.querySelectorAll('.speak-this').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        const text = e.target.textContent
+        const lang = e.target.dataset.lang
+        speak(text, lang)
+      })
+    })
+
+    document.querySelector('.speak').addEventListener('click', () => {
+      const text = document.querySelector('[name="v0"]').value
+      const lang = document.querySelector('[name="voices"]').value
+      speak(text, lang)
+    })
+  </script>
+</html>
